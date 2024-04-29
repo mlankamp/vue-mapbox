@@ -8,7 +8,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFkYXN0ZXIiLCJhIjoiY2x2M24wZGhyMGIzdDJrbWZ5N
 onMounted(() => {
   const map = new mapboxgl.Map({
     container: 'map', // container ID
-    style: 'mapbox://styles/mapbox/light-v11', // style URL
+    style: 'mapbox://styles/mapbox/light-v11', // style URL //'mapbox://styles/madaster/clvgqlib9001u01pc3nojgwi0'
     center: [5.351186656179891, 52.029395707987604], // starting position [lng, lat]
     zoom: 19, // starting zoom
     pitch: 45,
@@ -29,11 +29,15 @@ onMounted(() => {
 
     // The 'building' layer in the Mapbox Streets vector tileset contains building height data from OpenStreetMap.
 
+    map.addSource('doorn', {
+      'type': 'vector',
+      'url': 'mapbox://madaster.clvgscx5i0fge1mowgk7sql3o-7fkai'
+    });
+
     const layer: mapboxgl.AnyLayer = {
       'id': '3d-buildings',
-      'source': 'composite',
-      'source-layer': 'building',
-      'filter': ['==', 'extrude', 'true'],
+      'source': 'doorn',
+      'source-layer': 'doorn',
       'type': 'fill-extrusion',
       'minzoom': 12,
       'paint': {
@@ -43,24 +47,7 @@ onMounted(() => {
           '#398684'
         ],
         // Use an 'interpolate' expression to add a smooth transition effect to the buildings as the user zooms in.
-        'fill-extrusion-height': [
-          'interpolate',
-          ['linear'],
-          ['zoom'],
-          15,
-          0,
-          15.05,
-          ['get', 'height']
-        ],
-        'fill-extrusion-base': [
-          'interpolate',
-          ['linear'],
-          ['zoom'],
-          15,
-          0,
-          15.05,
-          ['get', 'min_height']
-        ],
+        'fill-extrusion-height': ['case',['all',['has','height'],['>',['get', 'height'],2]],['get', 'height'],8],
         'fill-extrusion-opacity': 0.7
       }
     };
@@ -87,6 +74,8 @@ onMounted(() => {
         'selected': true
       });
       selected = feature;
+
+      console.log(map.getFeatureState(feature));
 
     });
 
