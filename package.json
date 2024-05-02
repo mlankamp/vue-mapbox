@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "mapbox-gl": "^3.3.0",
-    "vue": "^3.4.26",
-    "vuetify": "^3.6.1"
+    "vue": "3.4.26",
+    "vuetify": "3.5.17"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
@@ -35,6 +35,6 @@
     "typescript": "~5.4.5",
     "vite": "^5.2.10",
     "vite-plugin-vuetify": "^2.0.3",
-    "vue-tsc": "^2.0.16"
+    "vue-tsc": "2.0.16"
   }
 }
