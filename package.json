@@ -14,7 +14,7 @@
   "dependencies": {
     "mapbox-gl": "^3.4.0",
     "vue": "3.4.38",
-    "vuetify": "3.7.0"
+    "vuetify": "3.7.1"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
